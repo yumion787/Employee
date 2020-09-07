@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+    "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+	<servlet>
+		<servlet-name>LoginServlet</servlet-name>
+		<servlet-class>Employee.LoginServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ListServlet</servlet-name>
+		<servlet-class>Employee.ListServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ManagementServlet</servlet-name>
+		<servlet-class>Employee.ManagementServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>DetailServlet</servlet-name>
+		<servlet-class>Employee.DetailServlet</servlet-class>
+    </servlet>
+    <servlet>
+		<servlet-name>DeleteServlet</servlet-name>
+		<servlet-class>Employee.DeleteServlet</servlet-class>
+    </servlet>
+
+	<servlet-mapping>
+		<servlet-name>LoginServlet</servlet-name>
+		<url-pattern>/Login</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ListServlet</servlet-name>
+		<url-pattern>/List</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ManagementServlet</servlet-name>
+		<url-pattern>/Management</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>DetailServlet</servlet-name>
+		<url-pattern>/Detail</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>DeleteServlet</servlet-name>
+		<url-pattern>/Delete</url-pattern>
+	</servlet-mapping>
+
+	<welcome-file-list>
+    	<welcome-file>login.jsp</welcome-file>
+  	</welcome-file-list>
+
+
+</web-app>
