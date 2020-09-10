@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 public class Login implements Serializable {
 
-	private String login_id;
-	private String password;
+	private String login_id;		// ログインID
+	private String password;		// パスワード
 
 	public String getLogin_id() {
 		return login_id;

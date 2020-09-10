@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.EmployeeBean;
+import dao.ManagementDAO;
 
 /**
  * Servlet implementation class DeleteServlet
@@ -16,14 +16,6 @@ import model.EmployeeBean;
 @WebServlet("/DeleteServlet")
 public class DeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public DeleteServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -33,7 +25,29 @@ public class DeleteServlet extends HttpServlet {
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
 
 		// パラメータをGetして、Postへ流す
-		doPost(request, response);
+//		doPost(request, response);
+
+		// 文字コードの設定
+		request.setCharacterEncoding("UTF-8");
+		// 処理クラスをインスタンス化
+		ManagementDAO dao = new ManagementDAO();
+
+		// フォームから送信されるデータを受け取る
+		String s_employee_id = request.getParameter("employee_id");
+
+		// 変数を初期化
+		String msg = null;
+		int employee_id = 0;
+
+		if (s_employee_id != null) {
+			employee_id = Integer.parseInt(s_employee_id);
+			dao.deleteData(employee_id);
+			msg = "削除しました";
+		}
+		// msgをセットして、result.jspへ転送
+		request.setAttribute("msg", msg);
+		request.getRequestDispatcher("/result.jsp").forward(request, response);
+
 	}
 
 	/**
@@ -43,27 +57,30 @@ public class DeleteServlet extends HttpServlet {
 
 		// 文字コードの設定
 		request.setCharacterEncoding("UTF-8");
+		// 処理クラスをインスタンス化
+		ManagementDAO dao = new ManagementDAO();
 
-		// modeの取得
-		String mode = request.getParameter("mode");
+		// フォームから送信されるデータを受け取る
+		String s_employee_id = request.getParameter("employee_id");
 
-		// 実行ステータスの宣言
-		String msg = "成功しました";
+		// 変数を初期化
+		String msg = null;
+		int employee_id = 0;
 
-		// JavaBeansの初期化
-		EmployeeBean emp = new EmployeeBean(request);
-
-		// 失敗時のステータス
-		if (mode == "deleteData") {
-			if (emp.deleteData() == false) {
-				msg = "失敗しました";
-			}
+		// int に変換
+		try {
+			employee_id = Integer.parseInt(s_employee_id);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
 		}
 
-		// msgをセットして、result.jspへ転送
+		if (request.getParameter("deleteData") != null) {
+			dao.deleteData(employee_id);
+			msg = "削除しました";
+		}
+		// msgをセットして、一覧画面へ転送
 		request.setAttribute("msg", msg);
-		request.getRequestDispatcher("/result.jsp").forward(request, response);
-
+		request.getRequestDispatcher("/ManagementServlet").forward(request, response);
 	}
 
 }

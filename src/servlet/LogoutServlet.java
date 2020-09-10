@@ -31,7 +31,7 @@ public class LogoutServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		//
+		// session 切断
 		HttpSession session = request.getSession(false);
 		if (session != null || session.getAttribute("login_id") != null) {
 			session.invalidate();

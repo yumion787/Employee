@@ -16,8 +16,6 @@
 			<h1>結果画面</h1>
 			<p><%=msg%></p>
 			<a href="ManagementServlet">一覧へ戻る</a>
-			<br>
-			<a href="./index.jsp">TOPへ</a>
 		</div>
 	</div>
 

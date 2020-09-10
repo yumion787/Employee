@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>ログイン</title>
 </head>
+<link rel="stylesheet" href="Employee/css/login.css" type="text/css">
 <body>
 	<h1 align="center">社員管理システム</h1>
 	<%
@@ -15,14 +16,9 @@
 		if(msg_error == null) {
 			msg_error = "";
 		}
-		String msg_login = (String)request.getAttribute("msg_login");
-		if(msg_login == null) {
-			msg_login = "";
-		}
 	%>
 	<div align="center">
 		<span style="color:#FF0000"><%= msg_error %></span>
-		<%-- <span style="color:#0000FF"><%= msg_login %></span> --%>
 	</div>
 	<form action="/Employee/LoginServlet" method="POST">
 		<table border="1" align="center" bgcolor="#FFCC00" style="border-collapse: collapse ">
@@ -35,7 +31,7 @@
 				<td><input type="password" name="password"></td>
 			</tr>
 		</table>
-		<div align="center"><input type="submit" value="ログイン" /></div>
+		<div class="login-btn" align="center"><input type="submit" value="ログイン" /></div>
 	</form>
 </body>
 </html>

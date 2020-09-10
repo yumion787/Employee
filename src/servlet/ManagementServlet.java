@@ -21,14 +21,6 @@ public class ManagementServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ManagementServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -54,7 +46,6 @@ public class ManagementServlet extends HttpServlet {
 
 		// 一覧画面に移動
 		request.getRequestDispatcher("/list.jsp").forward(request, response);
-		request.getRequestDispatcher("/detail.jsp").forward(request, response);
 		}
 	}
 

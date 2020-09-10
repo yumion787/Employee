@@ -20,31 +20,29 @@ public class AccountDAO {
 	private ResultSet rs = null;
 
 	public Account findByLogin(Login login) {
-
 		Account account = null;
-
 		try {
 			//JDBCドライバを読み込む
-			Class.forName("org.h2.Driver");
+//			Class.forName("org.h2.Driver");					// h2
+			Class.forName("com.mysql.cj.jdbc.Driver");		// MySQL
 
-			//DBに接続
-			con = DriverManager.getConnection("jdbc:h2:~/employee", "sa", "");
+			//DB接続
+//			con = DriverManager.getConnection("jdbc:h2:~/employee", "sa", "");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/management?serverTimezone=UTC&useSSL=false",
+					"root", "taku07151735");
 
-			// SQL文の作成準備
-//			StringBuffer sql = new StringBuffer();
-
-			// SELECT文を準備
-//			sql.append("SELECT LOGIN_ID, PASSWORD FROM LOGIN_INFO WHERE LOGIN_ID = ? AND PASSWORD = ?;");
+			// SQL文を準備(SELECT文)
 			String sql = "SELECT LOGIN_ID, PASSWORD FROM LOGIN_INFO WHERE LOGIN_ID = ? AND PASSWORD = ?";
+
 			// SQL実行準備
 			ps = con.prepareStatement(sql);
 			ps.setString(1, login.getLogin_id());
 			ps.setString(2, login.getPassword());
 
-			// SQLを表示
+			// SQL表示
 			System.out.println(sql);
 
-			// SELECTを実行し、結果表を代入
+			// SELECT文を実行し、結果表を代入
 			rs = ps.executeQuery();
 
 			// 一致したユーザーが存在した場合、Accountインスタンスを生成
@@ -61,6 +59,7 @@ public class AccountDAO {
 			e.printStackTrace();
 			return null;
 		} finally {
+			// DB切断
 			if(con != null) {
 				try {
 					con.close();
@@ -70,7 +69,7 @@ public class AccountDAO {
 				}
  			}
 		}
-		//見つかったユーザーまたはnullを返す
+		// 見つかったユーザーまたはnullを返す
 		return account;
 	}
 }

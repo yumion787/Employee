@@ -2,8 +2,13 @@ package model;
 
 public class Account {
 
-	private String login_id;
-	private String password;
+	private String login_id;		// ログインID
+	private String password;		// パスワード
+
+	public Account(String login_id, String password) {
+		this.login_id = login_id;
+		this.password = password;
+	}
 
 	public String getLogin_id() {
 		return login_id;
@@ -18,9 +23,6 @@ public class Account {
 		this.password = password;
 	}
 
-	public Account(String login_id, String password) {
-		this.login_id = login_id;
-		this.password = password;
-	}
+
 
 }

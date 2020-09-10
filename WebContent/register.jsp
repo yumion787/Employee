@@ -7,18 +7,15 @@
 <title>社員詳細</title>
 </head>
 <body>
-	<br>
 	<%
-		//"emp"
-			EmployeeBean emp =(EmployeeBean)request.getAttribute( "emp" );
+		EmployeeBean emp =(EmployeeBean)request.getAttribute( "emp" );
 	%>
 
 	<h1 align="center">社員詳細</h1>
+
 	<form action="/Employee/DetailServlet" method="POST">
-		E_ID: <input type="text" name="employee_id">
-		<br>
-		E_I_ID: <input type="text" name="employee_info_id">
-		<br>
+		<input type="hidden" name="employee_id">
+		<input type="hidden" name="employee_info_id">
 		<table border="1" align="center">
 		<tr>
 			<td>氏名</td>
@@ -117,14 +114,10 @@
 		</table>
 		<br>
 		<div align="center">
-			<!-- <input type="hidden" name="mode" value="addData">
-			<input type="submit" value="登録" onclick="return confirm('登録確認')"> -->
 			<input type="submit" name="addData" value="登録" onclick="return confirm('登録確認')">
 			&nbsp;&nbsp;
 			<input type="button" onclick="location.href='/Employee/ManagementServlet'" value="戻る">
 		</div>
 	</form>
-	<br>
-	<a href="./index.jsp">TOPへ</a>
 </body>
 </html>

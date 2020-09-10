@@ -18,9 +18,7 @@ public class LoginServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		//フォワード
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
@@ -47,18 +45,12 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("login_id", login_id);
 
 			// フォワード
-//			RequestDispatcher dispatcher = request.getRequestDispatcher("/list.jsp");
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/ManagementServlet");
 			dispatcher.forward(request, response);
-
 		} else {  //ログイン失敗時
 
-			request.setAttribute("msg_error", "IDまたはパスワードが間違っています");
+			request.setAttribute("msg_error", "IDまたはパスワードが違います");
 			request.getRequestDispatcher("/login.jsp").forward(request, response);
-
-			//リダイレクト
-//			response.sendRedirect("/Employee/LoginServlet");
-
 		}
 	}
 }

@@ -28,7 +28,6 @@ public class ManagementDAO {
 				EmployeeBean emp = new EmployeeBean();
 
 				emp.setEmployee_id(rs.getInt("employee_id"));
-//				emp.setEmployee_id(rs.getString("employee_id"));
 				emp.setName(rs.getString("name"));
 				emp.setName_hiragana(rs.getString("name_hiragana"));
 				emp.setBirthday(rs.getString("birthday"));
@@ -36,21 +35,18 @@ public class ManagementDAO {
 				emp.setMail_address(rs.getString("mail_address"));
 				emp.setTelephone_number(rs.getString("telephone_number"));
 				emp.setCompany_info_id(rs.getInt("company_info_id"));
-//				emp.setCompany_info_id(rs.getString("company_info_id"));
 				emp.setBusiness_manager(rs.getString("business_manager"));
 				emp.setDepartment(rs.getString("department"));
 				emp.setCommissioning_status(rs.getString("commissioning_status"));
 				emp.setCreated_id(rs.getString("created_id"));
 				emp.setModified_id(rs.getString("modified_id"));
 				emp.setEmployee_info_id(rs.getInt("employee_info_id"));
-//				emp.setEmployee_info_id(rs.getString("employee_info_id"));
 				emp.setEnter_date(rs.getString("enter_date"));
 				emp.setRetire_date(rs.getString("retire_date"));
 				emp.setStatus(rs.getString("status"));
 
 				employeeList.add(emp);
 			}
-
 		} catch (SQLException e) {
 			 // 例外処理
 			e.printStackTrace();
@@ -65,14 +61,11 @@ public class ManagementDAO {
 
 
 	/**
-	 * items テーブルにアイテムのデータを追加する
-	 *
-	 * @param employee_id
-	 * @param name
-	 * @param name_hiragana
+	 * テーブルにデータを追加する
 	 */
 	public void addData(int employee_id ,String name, String name_hiragana, String birthday, String sex, String mail_address, String telephone_number, int company_info_id, String business_manager, String department,
 			String commissioning_status, String created_id, String modified_id, int employee_info_id, String enter_date, String retire_date, String status) {
+
 		// データベース接続をするために DAO をインスタンス化
 		EmployeeDAO dao = new EmployeeDAO();
 
@@ -112,6 +105,7 @@ public class ManagementDAO {
 
 	public void updateData(int employee_id ,String name, String name_hiragana, String birthday, String sex, String mail_address, String telephone_number, int company_info_id, String business_manager, String department,
 			String commissioning_status, String created_id, String modified_id, int employee_info_id, String enter_date, String retire_date, String status) {
+
 		// データベース接続をするために DAO をインスタンス化
 		EmployeeDAO dao = new EmployeeDAO();
 
@@ -149,5 +143,26 @@ public class ManagementDAO {
 	}
 
 
+	public void deleteData(int employee_id) {
+
+		// データベース接続をするために DAO をインスタンス化
+		EmployeeDAO dao = new EmployeeDAO();
+
+		// bean を生成
+		EmployeeBean bean = new EmployeeBean();
+
+		bean.setEmployee_id(employee_id);
+
+		try {
+			// bean のデータをもとに情報を変更
+			dao.delete(bean);
+		} catch (SQLException e) {
+			// 例外処理
+			e.printStackTrace();
+		} finally {
+			// データベースから切断
+			dao.close();
+		}
+	}
 
 }
