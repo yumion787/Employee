@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html;charset=UTF-8"%>
-<%@page import="java.sql.*"%>
+<%@ page import="java.sql.*"%>
+<%@ page isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="java.util.ArrayList" %>
@@ -12,6 +13,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="./css/list.css" type="text/css">
 <title>社員一覧</title>
 </head>
 <body>
@@ -32,7 +34,7 @@
 		</form>
 	</div>
 	<h1 align="center">社員一覧</h1>
-	<div align="right">
+	<div class="register-btn" align="right">
 		<a href="./register.jsp"><input type="button" name="register" value="新規登録" /></a>
 	</div>
 	<table border="1" align="center">
@@ -49,54 +51,74 @@
 			<td><b>詳細</b></td>
 			<td><b>削除</b></td>
 		</tr>
-		<% for(EmployeeBean emp : empList) { %>
+		<c:forEach var="emp" items="${empList}" varStatus="status" >
 		<tr>
-			<td><%= emp.getEmployee_id() %></td>			<!-- 1 社員ID -->
-			<td><%= emp.getCompany_info_id() %></td>		<!-- 8 所属会社ID -->
-			<td><%= emp.getDepartment()%></td>				<!-- 10 事業部 -->
-			<td><%= emp.getName()%></td>					<!-- 2 氏名 -->
-			<td><%= emp.getName_hiragana()%></td>			<!-- 3 氏名(ひらがな) -->
-			<td><%= emp.getBirthday()%></td>				<!-- 4 生年月日 -->
-			<td><%= emp.getBusiness_manager()%></td>		<!-- 9 担当管理営業 -->
-			<td><%= emp.getEnter_date()%></td>				<!-- 15 入社日 -->
-			<td><%= emp.getCommissioning_status()%></td>	<!-- 11 稼働状況 -->
-			<!-- 更新 POST -->
+			<td><c:out value="${emp.employee_id}" /></td>				<!-- 1 社員ID -->
+			<td>
+				<!-- 1:ABC 2:DEF 3:GHI -->
+				<c:choose>
+					<c:when test="${emp.company_info_id  == 1 }">ABC</c:when>
+					<c:when test="${emp.company_info_id  == 2 }">DEF</c:when>
+					<c:when test="${emp.company_info_id  == 3 }">GHI</c:when>
+					<c:otherwise></c:otherwise>
+				</c:choose>
+			</td>			<!-- 8 所属会社ID -->
+			<td>
+				<!-- 0:開発 1:NW 2:検証 3:オフィス 4:管理 -->
+				<c:choose>
+					<c:when test="${emp.department  == 0 }">開発</c:when>
+					<c:when test="${emp.department  == 1 }">NW</c:when>
+					<c:when test="${emp.department  == 2 }">検証</c:when>
+					<c:when test="${emp.department  == 3 }">オフィス</c:when>
+					<c:when test="${emp.department  == 4 }">管理</c:when>
+					<c:otherwise></c:otherwise>
+				</c:choose>
+			</td>				<!-- 10 事業部 -->
+			<td><c:out value="${emp.name}" /></td>						<!-- 2 氏名 -->
+			<td><c:out value="${emp.name_hiragana}" /></td>				<!-- 3 氏名(ひらがな) -->
+			<td><c:out value="${emp.birthday}" /></td>					<!-- 4 生年月日 -->
+			<td><c:out value="${emp.business_manager}" /></td>			<!-- 9 担当管理営業 -->
+			<td>
+				<c:out value="${emp.enter_date}" />
+				<%-- <fmt:formatDate value="${emp.enter_date}" pattern="yyyy/MM/dd" /> --%>
+			</td>				<!-- 15 入社日 -->
+			<td>
+				<c:choose>
+					<c:when test="${emp.commissioning_status  == 0 }">未稼働</c:when>
+					<c:when test="${emp.commissioning_status  == 1 }">稼働</c:when>
+					<c:otherwise></c:otherwise>
+				</c:choose>
+			</td>		<!-- 11 稼働状況 -->
+			<!-- 更新 -->
 			<td>
 				<form action="/Employee/DetailServlet" method="POST">
-					<!-- <input type="hidden" name="mode" value="detailData"> -->
-					<input type="hidden" name="employee_id" value="<%= emp.getEmployee_id() %>">
-					<input type="hidden" name="name" value="<%= emp.getName() %>">
-					<input type="hidden" name="name_hiragana" value="<%= emp.getName_hiragana()%>">
-					<input type="hidden" name="birthday" value="<%= emp.getBirthday()%>">
-					<input type="hidden" name="sex" value="<%= emp.getSex()%>">
-					<input type="hidden" name="mail_address" value="<%= emp.getMail_address()%>">
-					<input type="hidden" name="telephone_number" value="<%= emp.getTelephone_number()%>">
-					<input type="hidden" name="company_info_id" value="<%= emp.getCompany_info_id()%>">
-					<input type="hidden" name="business_manager" value="<%= emp.getBusiness_manager()%>">
-					<input type="hidden" name="department" value="<%= emp.getDepartment()%>">
-					<input type="hidden" name="commissioning_status" value="<%= emp.getCommissioning_status()%>">
-					<input type="hidden" name="created_id" value="<%= emp.getCreated_id()%>">
-					<input type="hidden" name="modified_id" value="<%= emp.getModified_id()%>>">
-					<input type="hidden" name="employee_info_id" value="<%= emp.getEmployee_info_id()%>">
-					<input type="hidden" name="enter_date" value="<%= emp.getEnter_date()%>">
-					<input type="hidden" name="retire_date" value="<%= emp.getRetire_date()%>">
-					<input type="hidden" name="status" value="<%= emp.getStatus()%>">
-					<!-- <input type="submit" name="detail" value="詳細"> -->
+					<input type="hidden" name="employee_id" value="${emp.employee_id}">
+					<input type="hidden" name="name" value="${emp.name}">
+					<input type="hidden" name="name_hiragana" value="${emp.name_hiragana}">
+					<input type="hidden" name="birthday" value="${emp.birthday}">
+					<input type="hidden" name="sex" value="${emp.sex}">
+					<input type="hidden" name="mail_address" value="${emp.mail_address}">
+					<input type="hidden" name="telephone_number" value="${emp.telephone_number}">
+					<input type="hidden" name="company_info_id" value="${emp.company_info_id}">
+					<input type="hidden" name="business_manager" value="${emp.business_manager}">
+					<input type="hidden" name="department" value="${emp.department}">
+					<input type="hidden" name="commissioning_status" value="${emp.commissioning_status}">
+					<input type="hidden" name="created_id" value="${emp.created_id}">
+					<input type="hidden" name="modified_id" value="${emp.modified_id}">
+					<input type="hidden" name="employee_info_id" value="${emp.employee_info_id}">
+					<input type="hidden" name="enter_date" value="${emp.enter_date}">
+					<input type="hidden" name="retire_date" value="${emp.retire_date}">
+					<input type="hidden" name="status" value="${emp.status}">
 					<input type="submit" name="detailData" value="詳細">
 				</form>
 			</td>
-			<!-- 削除 POST -->
+			<!-- 削除 -->
 			<td>
-				<!-- DeleteServlet POST -->
-				<%-- <form action="/Employee/DeleteServlet" method="POST">
-					<input type="hidden" name="employee_id" value="<%= emp.getEmployee_id() %>">
-					<input type="submit" name="deleteData" value="削除" onclick="return confirm('削除しますか？')" >
-				</form> --%>
 				<!-- DeleteServlet GET -->
-				<a href="/Employee/DeleteServlet?employee_id=<%= emp.getEmployee_id() %>" onclick="return confirm('[<%= emp.getEmployee_id() %>][<%= emp.getCompany_info_id() %>][<%= emp.getName() %>]を削除しますか？')">削除</a>
+				<a href="/Employee/DeleteServlet?employee_id=${emp.employee_id}" onclick="return confirm('[${emp.employee_id}][${emp.company_info_id}][${emp.name}]を削除しますか？')">削除</a>
 			</td>
 		</tr>
-		<% }	// endfor %>
+		</c:forEach>
 	</table>
 </body>
 </html>

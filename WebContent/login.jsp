@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>ログイン</title>
 </head>
-<link rel="stylesheet" href="Employee/css/login.css" type="text/css">
+<link rel="stylesheet" href="./css/login.css" type="text/css">
 <body>
 	<h1 align="center">社員管理システム</h1>
 	<%

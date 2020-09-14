@@ -18,42 +18,42 @@
 		<input type="hidden" name="employee_info_id">
 		<table border="1" align="center">
 		<tr>
-			<td>氏名</td>
+			<td bgcolor="#bad3ff">氏名</td>
 			<td>
 				<input type="text" name="name" maxlength='20' required>
 			</td>
 		</tr>
 		<tr>
-			<td>氏名(ひらがな)</td>
+			<td bgcolor="#bad3ff">氏名(ひらがな)</td>
 			<td>
 				<input type="text" name="name_hiragana" maxlength='20' required>
 			</td>
 		</tr>
 		<tr>
-			<td>生年月日</td>
+			<td bgcolor="#bad3ff">生年月日</td>
 			<td>
 				<input type="date" name="birthday">
 			</td>
 		</tr>
 		<tr>
-			<td>性別</td>
+			<td bgcolor="#bad3ff">性別</td>
 			<td>
 				<input type="radio" name="sex" value="0">男
 				<input type="radio" name="sex" value="1">女
 			</td>
 		</tr>
 		<tr>
-			<td>メールアドレス</td>
+			<td bgcolor="#bad3ff">メールアドレス</td>
 			<td>
 				<input type="text" name="mail_address" maxlength='50'>
 			</td>
 		</tr>
 		<tr>
-			<td>電話番号</td>
+			<td bgcolor="#bad3ff">電話番号</td>
 			<td><input type="text" name="telephone_number" maxlength='13'></td>
 		</tr>
 		<tr>
-			<td>所属会社</td>
+			<td bgcolor="#bad3ff">所属会社</td>
 			<td>
 				<select name="company_info_id">
 					<option value="" selected ></option>
@@ -64,11 +64,11 @@
 			</td>
 		</tr>
 		<tr>
-			<td>担当管理営業</td>
+			<td bgcolor="#bad3ff">担当管理営業</td>
 			<td><input type="text" name="business_manager" maxlength='20'></td>
 		</tr>
 		<tr>
-			<td>事業部</td>
+			<td bgcolor="#bad3ff">事業部</td>
 			<td>
 				<select name="department">
 					<option value="" selected ></option>
@@ -81,26 +81,26 @@
 			</td>
 		</tr>
 		<tr>
-			<td>稼働状況</td>
+			<td bgcolor="#bad3ff">稼働状況</td>
 			<td>
 				<input type="radio" name="commissioning_status" value="1">稼働
 				<input type="radio" name="commissioning_status" value="0">未稼働
 			</td>
 		</tr>
 		<tr>
-			<td>入社日</td>
+			<td bgcolor="#bad3ff">入社日</td>
 			<td>
 				<input type="date" name="enter_date" required>
 			</td>
 		</tr>
 		<tr>
-			<td>退職日</td>
+			<td bgcolor="#bad3ff">退職日</td>
 			<td>
 				<input type="date" name="retire_date" >
 			</td>
 		</tr>
 		<tr>
-			<td>ステータス</td>
+			<td bgcolor="#bad3ff">ステータス</td>
 			<td>
 				<select name="status" >
 					<option value="" selected ></option>
